@@ -20,24 +20,18 @@ main{
     justify-content: center;
     align-items: center;
 }
-
-.click-me {
+.buttons{
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+.yes,.btn{
     margin-top: 20px;
     background-color: lightskyblue;
-    padding: 10px 20px;
+    padding: 20px 30px;
     border-radius: 5px;
     border: none;
     cursor: pointer;
     /* outline: none; */
     font-family: monospace;
-}
-
-.click-me:hover {
-    background-color: deepskyblue;
-    color: white;
-}
-
-a{
-    text-decoration: none;
-
 }
