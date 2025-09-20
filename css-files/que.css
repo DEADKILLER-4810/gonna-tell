@@ -35,3 +35,8 @@ main{
     /* outline: none; */
     font-family: monospace;
 }
+
+a{
+    text-decoration: none;
+    color: black;
+}
