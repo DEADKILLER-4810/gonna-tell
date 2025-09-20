@@ -1,50 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finally</title>
-    <link rel="stylesheet" href="css-files/ans.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tell Me That Thing 💬</title>
+  <link rel="stylesheet" href="css-files/ans.css">
 </head>
 <body>
-
 <main>
+  <h1>Tell Me That Thing 💬</h1>
 
-    <h1>Okay, Fill The Box Below</h1>
+  <input type="text" id="msgInput" placeholder="Type your message">
+  <button id="sendBtn">Send</button>
 
-    <input type="text" id="userInput" placeholder="Type Here...">
-     <button id="sendBtn">Send</button>
-     <p id="status"></p>
-
+  <div id="status"></div>
 </main>
-<script>
-    const input = document.getElementById("userInput");
-    const btn = document.getElementById("sendBtn");
-    const status = document.getElementById("status");
+  <script>
+    const sendBtn = document.getElementById("sendBtn");
+    const msgInput = document.getElementById("msgInput");
+    const statusDiv = document.getElementById("status");
 
-    btn.addEventListener("click", async () => {
-      const text = input.value.trim();
+    sendBtn.addEventListener("click", async () => {
+      const message = msgInput.value.trim();
+      if (!message) {
+        statusDiv.textContent = "Please type a message!";
+        statusDiv.className = "error";
+        return;
+      }
 
-      if (text !== "") {
-        try {
-          const response = await fetch("http://localhost:3000/send", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ message: text })
-          });
+      try {
+        const res = await fetch("http://localhost:3000/send", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message })
+        });
 
-          const result = await response.json();
-          status.textContent = result.msg;
-          input.value = "";
-        } catch (err) {
-          status.textContent = "Error sending message!";
+        const data = await res.json();
+        if (res.ok) {
+          statusDiv.textContent = data.msg;
+          statusDiv.className = "success";
+          msgInput.value = ""; // clear input
+        } else {
+          statusDiv.textContent = data.msg || "Error sending message!";
+          statusDiv.className = "error";
         }
+      } catch (err) {
+        console.error(err);
+        statusDiv.textContent = "Error sending message!";
+        statusDiv.className = "error";
       }
     });
   </script>
 
-    
 </body>
 </html>
