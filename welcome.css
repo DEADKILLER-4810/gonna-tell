@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+        background-color: lightpink;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    font-family: sans-serif;
+}
+
+main{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.click-me {
+    margin-top: 20px;
+    background-color: lightskyblue;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    /* outline: none; */
+    font-family: monospace;
+}
+
+.click-me:hover {
+    background-color: deepskyblue;
+    color: white;
+}
